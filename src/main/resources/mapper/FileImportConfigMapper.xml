@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.importer.mapper.FileImportConfigMapper">
+
+    <resultMap id="fileConfigResultMap" type="com.example.importer.domain.FileImportConfig">
+        <id property="id" column="id"/>
+        <result property="configCode" column="config_code"/>
+        <result property="ossBucket" column="oss_bucket"/>
+        <result property="ossObjectKey" column="oss_object_key"/>
+        <result property="fileType" column="file_type"/>
+        <result property="delimiter" column="delimiter"/>
+        <result property="fieldNames" column="field_names"/>
+        <result property="targetIndex" column="target_index"/>
+        <result property="batchSize" column="batch_size"/>
+        <result property="enabled" column="enabled"/>
+        <result property="gmtCreated" column="gmt_created"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="fileConfigResultMap">
+        SELECT id, config_code, oss_bucket, oss_object_key, file_type, delimiter,
+               field_names, target_index, batch_size, enabled, gmt_created, gmt_modified
+        FROM file_import_config
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectEnabledConfigs" resultMap="fileConfigResultMap">
+        SELECT id, config_code, oss_bucket, oss_object_key, file_type, delimiter,
+               field_names, target_index, batch_size, enabled, gmt_created, gmt_modified
+        FROM file_import_config
+        WHERE enabled = 1
+    </select>
+
+</mapper>

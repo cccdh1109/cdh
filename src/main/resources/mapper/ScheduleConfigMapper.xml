@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.importer.mapper.ScheduleConfigMapper">
+
+    <resultMap id="scheduleConfigResultMap" type="com.example.importer.domain.ScheduleConfig">
+        <id property="id" column="id"/>
+        <result property="taskCode" column="task_code"/>
+        <result property="cronExpression" column="cron_expression"/>
+        <result property="fileConfigId" column="file_config_id"/>
+        <result property="enabled" column="enabled"/>
+        <result property="gmtCreated" column="gmt_created"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+    <select id="selectEnabledSchedules" resultMap="scheduleConfigResultMap">
+        SELECT id, task_code, cron_expression, file_config_id, enabled, gmt_created, gmt_modified
+        FROM import_schedule_config
+        WHERE enabled = 1
+    </select>
+
+</mapper>
